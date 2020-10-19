@@ -14,7 +14,7 @@ app.listen(8080, () => {
 
 app.post('/bill', (req,res) => {
     //bill.push(req.body)
-    res.status(200).json(bill.prices)
+    res.status(200).json(req.body);
 })
 
 
