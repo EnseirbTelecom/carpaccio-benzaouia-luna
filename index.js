@@ -2,17 +2,19 @@ const express = require('express')
 const app = express()
 const id = require('./id.json')
 const bill = require('./bill.json')
+const json = require('express')
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
+
+app.use(express.json());
 
 app.get('/id', (req,res) => {
     res.status(200).json(id)
 })
 
 app.post('/bill', (req,res) => {
-    prices = bill.prices;
-    quantities = bill.quantities; 
+    prices = req.body.prices;
+    quantities = req.body.quantities; 
     var bills = 0;
     if (prices.length == quantities.length){
         prices.forEach ((element, indice) => 
