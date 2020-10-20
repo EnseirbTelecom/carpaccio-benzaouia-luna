@@ -2,28 +2,37 @@ const express = require('express')
 const app = express()
 const id = require('./id.json')
 const bill = require('./bill.json')
-fct = require('./fonction.js')
+const bodyParser = require('body-parser');
+
+const urlencodeParser = bodyParser.urlencoded({extended: true});
+
+app.use(bodyParser.json());
+app.use(urlencodeParser);
+
 
 app.get('/id', (req,res) => {
     res.status(200).json(id)
 })
 
-app.listen(8080, () => {
-    console.log(`Serveur à l'écoute`)
-  })
-
 app.post('/bill', (req,res) => {
-    //bill.push(req.body)
-    res.status(200).json(req.body);
+    var prices = req.body.prices;
+    console.log(req.body.prices);
+    var quantities = req.body.quantities; 
+    var bills = 0;
+    if (prices.length == quantities.length){
+        prices.forEach ((element, indice) => 
+            bills += element*quantities[indice])
+        res.status(200).json({total: bills})
+    }
+    else {
+        res.status(404).json({error : 'error message'})
+    }
+    
 })
 
 
-/*function bill(json){
-    const obj = JSON.parse(json);
-    prices = obj.prices;
-    quantities = obj.quantities; 
-    const bill = 0;
-    if (prices.length == quantities.length){
-        prices.forEach ((element, indice) => 
-            bill += element*quantities[indice])
-    }*/
+
+app.listen(8080, () => {
+    console.log(`Server listening`)
+  })
+
