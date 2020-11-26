@@ -4,13 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< Updated upstream
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
-=======
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
->>>>>>> Stashed changes
   },
   "repository": {
     "type": "git",
