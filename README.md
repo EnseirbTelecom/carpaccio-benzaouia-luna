@@ -1,6 +1,6 @@
 # carpaccio-benzaouia-luna
 
-# Team member : Doha Benzaouia & Joanie Luna
+## Team member : Doha Benzaouia & Joanie Luna
 
 # Description : 
 API de calcul de prix
