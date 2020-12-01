@@ -12,8 +12,7 @@ app.get('/id', (req, res) => {
 app.post('/bill', (req, res) => {
   const prices = req.body.prices
   const quantities = req.body.quantities
-  const bills = new Bill()
-  const bill = bills.calcul_bill(prices, quantities)
+  const bill = Bill.calculBill(prices, quantities)
   if (bill === -1) {
     res.status(400).json({ error: 'error message' })
   } else {
