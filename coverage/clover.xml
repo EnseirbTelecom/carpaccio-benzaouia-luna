@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1606834702645" clover="3.2.0">
-  <project timestamp="1606834702645" name="All files">
+<coverage generated="1606838152038" clover="3.2.0">
+  <project timestamp="1606838152039" name="All files">
     <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2" elements="16" coveredelements="16" complexity="0" loc="8" ncloc="8" packages="1" files="1" classes="1"/>
-    <file name="functions.js" path="C:\Users\pc\Documents\GitHub\carpaccio-benzaouia-luna\app\src\functions.js">
+    <file name="functions.js" path="D:\Joanie\Téléchargements\Documents\Enseirb\T3\Genie Logiciel\Projet\carpaccio-benzaouia-luna\app\src\functions.js">
       <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
-      <line num="6" count="5" type="stmt"/>
-      <line num="7" count="5" type="cond" truecount="2" falsecount="0"/>
-      <line num="8" count="4" type="stmt"/>
-      <line num="9" count="8" type="cond" truecount="4" falsecount="0"/>
-      <line num="10" count="6" type="stmt"/>
-      <line num="13" count="4" type="stmt"/>
-      <line num="16" count="1" type="stmt"/>
-      <line num="20" count="1" type="stmt"/>
+      <line num="3" count="5" type="stmt"/>
+      <line num="4" count="5" type="cond" truecount="2" falsecount="0"/>
+      <line num="5" count="4" type="stmt"/>
+      <line num="6" count="8" type="cond" truecount="4" falsecount="0"/>
+      <line num="7" count="6" type="stmt"/>
+      <line num="10" count="4" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>

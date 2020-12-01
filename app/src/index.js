@@ -16,10 +16,9 @@ app.post('/bill', (req, res) => {
   const bill = bills.calcul_bill(prices, quantities)
   if (bill === -1) {
     res.status(400).json({ error: 'error message' })
-  }
-  else {
+  } else {
     res.status(200).json({ total: bill })
-  }    
+  }
 })
 
 app.listen(8080, () => {
