@@ -3,6 +3,8 @@ const app = express()
 const id = require('../data/id.json')
 const json = require('express')
 const bodyParser = require('body-parser');
+//const { calcul_bill } = require('./functions');
+var Bill = require('./functions');
 
 
 app.use(express.json());
@@ -13,15 +15,14 @@ app.get('/id', (req,res) => {
 
 app.post('/bill', (req,res) => {
     prices = req.body.prices;
-    quantities = req.body.quantities; 
-    var bills = 0;
-    if (prices.length == quantities.length){
-        prices.forEach ((element, indice) => 
-            bills += element*quantities[indice])
-        res.status(200).json({total: bills})
+    quantities = req.body.quantities;
+    bills = new Bill 
+    bill = bills.calcul_bill(prices, quantities);
+    if (bill == -1 ){
+        res.status(400).json({error : 'error message'})
     }
     else {
-        res.status(404).json({error : 'error message'})
+        res.status(200).json({total: bill})
     }
     
 })
