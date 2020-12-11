@@ -15,8 +15,7 @@ app.post('/bill', (req, res) => {
   const country = req.body.country
   const tva = Bill.calculTVA(country)
   const bill = Bill.calculBill(prices, quantities, tva)
-  console.log('bill finale', bill)
-  if (bill === -1) {
+  if (bill === "error") {
     res.status(400).json({ error: 'error message' })
   } else {
     res.status(200).json({ total: bill })
