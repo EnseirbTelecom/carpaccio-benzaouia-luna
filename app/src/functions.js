@@ -1,5 +1,7 @@
+const tva = require('../data/tva.json')
+
 class Bill {
-  static calculBill (prices, quantities) {
+  static calculBill (prices, quantities, tva) {
     let bills = 0
     if (prices.length === quantities.length) {
       prices.forEach((element, indice) => {
@@ -7,9 +9,23 @@ class Bill {
           bills += element * quantities[indice]
         }
       })
-      return bills
+      if (bills === 0 || bills < 0) {
+        return bills
+      } else {
+        const tvasurbill = bills * tva / 100
+        bills = bills + tvasurbill
+        return bills
+      }
     } else {
       return -1
+    }
+  }
+
+  static calculTVA (country) {
+    if (country !== undefined) {
+      return tva[country]
+    } else {
+      return 'error no country give'
     }
   }
 }

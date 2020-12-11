@@ -12,7 +12,10 @@ app.get('/id', (req, res) => {
 app.post('/bill', (req, res) => {
   const prices = req.body.prices
   const quantities = req.body.quantities
-  const bill = Bill.calculBill(prices, quantities)
+  const country = req.body.country
+  const tva = Bill.calculTVA(country)
+  const bill = Bill.calculBill(prices, quantities, tva)
+  console.log('bill finale', bill)
   if (bill === -1) {
     res.status(400).json({ error: 'error message' })
   } else {
