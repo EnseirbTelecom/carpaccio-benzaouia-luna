@@ -4,7 +4,7 @@ class Bill {
   static calculBill (prices, quantities, tva) {
     let bills = 0
     try {
-      if (tva !== "error tva" && prices.length === quantities.length) {
+      if (tva.constructor !== Error && prices.length === quantities.length) {
         prices.forEach((element, indice) => {
           if (element >= 0 && quantities[indice] >= 0) {
             bills += element * quantities[indice]
@@ -18,23 +18,21 @@ class Bill {
           return bills
         }
       }
-    throw "error"
-  } catch(e) {
-      return e;
+      throw new Error('Error Bill')
+    } catch (e) {
+      return e
     }
   }
 
   static calculTVA (country) {
-    try{
-      if (tva[country] !== undefined){
-          return tva[country]
+    try {
+      if (tva[country] !== undefined) {
+        return tva[country]
       }
-      throw "error tva"
+      throw new Error('Error Tva')
+    } catch (e) {
+      return e
     }
-    catch(e) {
-     return e;
-    }
-  } 
+  }
 }
-
 module.exports = Bill
