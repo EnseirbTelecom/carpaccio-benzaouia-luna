@@ -40,16 +40,16 @@ class Bill {
       case 'NO_DISCOUNT' :
         return total
       case 'PROGRESSIVE_DISCOUNT' :
-        if (total >= 1000) {
+        if (total >= 1000 && total < 5000) {
           return total - total * 3 / 100
         }
-        if (total >= 5000) {
+        if (total >= 5000 && total < 7000) {
           return total - total * 5 / 100
         }
-        if (total >= 7000) {
+        if (total >= 7000 && total < 10000) {
           return total - total * 7 / 100
         }
-        if (total >= 10000) {
+        if (total >= 10000 && total < 50000) {
           return total - total * 10 / 100
         }
         if (total >= 50000) {
@@ -63,14 +63,14 @@ class Bill {
           return total - 10
         }
         if (total >= 400 && total < 1000) {
-          return total - 1000
+          return total - 50
         }
         if (total >= 1000) {
-          return total - 2000
+          return total - 200
         }
         break
       default :
-        throw new Error('Impossible Discount')
+        return new Error('Error Discount')
     }
   }
 }

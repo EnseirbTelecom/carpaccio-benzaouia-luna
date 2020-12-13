@@ -22,6 +22,9 @@ app.post('/bill', (req, res) => {
     if (discount) {
       console.log(discount)
       const finalBill = Bill.calculDiscount(discount, bill)
+      if (finalBill.constructor === Error) {
+        res.status(400).json({ error: 'error message' })
+      }
       res.status(200).json({ total: finalBill })
     } else {
       res.status(200).json({ total: bill })
