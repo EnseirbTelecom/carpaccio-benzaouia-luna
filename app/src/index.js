@@ -21,11 +21,10 @@ app.post('/bill', (req, res) => {
   } else {
     if (discount) {
       console.log(discount)
-      finalBill = Bill.calculDiscount(discount, bill)
+      const finalBill = Bill.calculDiscount(discount, bill)
       res.status(200).json({ total: finalBill })
-    }
-    else {
-    res.status(200).json({ total: bill })
+    } else {
+      res.status(200).json({ total: bill })
     }
   }
 })
