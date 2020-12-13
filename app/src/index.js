@@ -13,12 +13,20 @@ app.post('/bill', (req, res) => {
   const prices = req.body.prices
   const quantities = req.body.quantities
   const country = req.body.country
+  const discount = req.body.discount
   const tva = Bill.calculTVA(country)
   const bill = Bill.calculBill(prices, quantities, tva)
   if (bill.constructor === Error) {
     res.status(400).json({ error: 'error message' })
   } else {
+    if (discount) {
+      console.log(discount)
+      finalBill = Bill.calculDiscount(discount, bill)
+      res.status(200).json({ total: finalBill })
+    }
+    else {
     res.status(200).json({ total: bill })
+    }
   }
 })
 
