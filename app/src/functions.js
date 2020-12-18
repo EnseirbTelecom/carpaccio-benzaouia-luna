@@ -36,6 +36,9 @@ class Bill {
   }
 
   static calculDiscount (discount, total) {
+    if (total < 0) {
+      return new Error('Error Discount')
+    }
     switch (discount) {
       case 'NO_DISCOUNT' :
         return total
