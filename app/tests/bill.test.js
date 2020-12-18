@@ -26,7 +26,7 @@ test('get TVA when a country is not in the list', () => {
 test('get TVA with no arguments', () => {
   expect(Bill.calculationTVA()).toMatchObject(Error('Error Tva'))
 })
-test('get total price with NO_DISCOUNT', () => {
+test('get total price with  NO_DISCOUNT', () => {
   expect(Bill.calculationDiscount('NO_DISCOUNT', 10)).toBe(10)
 })
 test('get total price with PROGRESSIVE_DISCOUNT and bill between 1000 and 5000', () => {
