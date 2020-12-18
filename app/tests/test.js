@@ -71,6 +71,12 @@ test('calcul du prix total avec FIXED_DISCOUNT et total de 500', () => {
 test('calcul du prix total avec FIXED_DISCOUNT et total de 1200', () => {
   expect(Bill.calculDiscount('FIXED_DISCOUNT', 1200)).toBe(1000)
 })
+test('calcul du prix total avec FIXED_DISCOUNT et total de -1200', () => {
+  expect(Bill.calculDiscount('FIXED_DISCOUNT', -1200)).toMatchObject(Error('Error Discount'))
+})
+test('calcul du prix total avec PROGRESSIVE_DISCOUNT et total de -50000', () => {
+  expect(Bill.calculDiscount('PROGRESSIVE_DISCOUNT', -50000)).toMatchObject(Error('Error Discount'))
+})
 test('calcul du prix total avex faux discount', () => {
   expect(Bill.calculDiscount('test_discount', 1200)).toMatchObject(Error('Error Discount'))
 })
