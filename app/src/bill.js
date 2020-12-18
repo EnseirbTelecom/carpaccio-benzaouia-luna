@@ -1,7 +1,7 @@
 const tva = require('../data/tva.json')
 
 class Bill {
-  static calculBill (prices, quantities, tva) {
+  static calculationBill (prices, quantities, tva) {
     let bills = 0
     try {
       if (tva.constructor !== Error && prices.length === quantities.length) {
@@ -24,7 +24,7 @@ class Bill {
     }
   }
 
-  static calculTVA (country) {
+  static calculationTVA (country) {
     try {
       if (tva[country] !== undefined) {
         return tva[country]
@@ -35,7 +35,7 @@ class Bill {
     }
   }
 
-  static calculDiscount (discount, total) {
+  static calculationDiscount (discount, total) {
     if (total < 0) {
       return new Error('Error Discount')
     }
@@ -77,4 +77,5 @@ class Bill {
     }
   }
 }
+
 module.exports = Bill
