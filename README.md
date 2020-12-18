@@ -21,8 +21,12 @@ Calcul le prix en fonction des paramètres donné par l'utilisateur, prix, quant
 - *npm test* pour lancer les tests
 
 **prices** : un tableau de valeur contenant les prix des articles
+
 **quantities** : un tableau de valeur contentant le nombre de chaque article
+
 **tva** : le code du pays dans lequel on calcul la note, ex "FR" si on se trouve en France
+
 **discount** : le code de la promotion à appliquer : "PROGRESSIVE_DISCOUNT" pour un % de réduction en fonction du montant total, "FLAT_DISCOUNT" pour un pourcentage de réduction peu importe le montant total, "FIXED_DISCOUNT" pour un montant de réduction en fonction du prix total
+
 **currency** : pour donner la devise dans laquelle on souhaite payer. La valeur par defaut est l'euro, "EUR", ex : si l'on veut payer en couronne islandaise : "ISK".
 
