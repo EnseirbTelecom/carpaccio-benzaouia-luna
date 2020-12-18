@@ -13,16 +13,17 @@ app.get('/id', (req, res) => {
 
 async function getDevise() {
 	try {
-		const response = await got('https://api.exchangeratesapi.io/latest');
+    const response = await got('https://api.exchangeratesapi.io/latest').json()
+                            .then((out) => {JSON.parse(out)});
+
     //console.log(response.body);
-    return response.body
+    return response
 	} catch (error) {
 		console.log(error.response.body);
 	}
 };
 
-getDevise().then((a)=>console.log(a));
-
+getDevise()
 app.post('/bill', (req, res) => {
   const prices = req.body.prices
   const quantities = req.body.quantities
