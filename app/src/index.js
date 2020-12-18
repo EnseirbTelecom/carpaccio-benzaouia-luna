@@ -1,5 +1,7 @@
+const { response } = require('express');
 const express = require('express')
 const app = express()
+const got = require('got');
 const id = require('../data/id.json')
 const Bill = require('./functions')
 
@@ -7,7 +9,19 @@ app.use(express.json())
 
 app.get('/id', (req, res) => {
   res.status(200).json(id)
-})
+});
+
+async function getDevise() {
+	try {
+		const response = await got('https://api.exchangeratesapi.io/latest');
+    //console.log(response.body);
+    return response.body
+	} catch (error) {
+		console.log(error.response.body);
+	}
+};
+
+getDevise().then((a)=>console.log(a));
 
 app.post('/bill', (req, res) => {
   const prices = req.body.prices
@@ -21,11 +35,11 @@ app.post('/bill', (req, res) => {
   } else {
     if (discount) {
       console.log(discount)
-      const finalBill = Bill.calculDiscount(discount, bill)
-      if (finalBill.constructor === Error) {
+      const discountBill = Bill.calculDiscount(discount, bill)
+      if (discountBill.constructor === Error) {
         res.status(400).json({ error: 'error message' })
       }
-      res.status(200).json({ total: finalBill })
+      res.status(200).json({ total: discountBill })
     } else {
       res.status(200).json({ total: bill })
     }
