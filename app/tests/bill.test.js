@@ -6,7 +6,7 @@ test('get bill with 0 0', () => {
   expect(Bill.calculationBill([0, 0], [0, 0], 20)).toBe(0)
 })
 test('get bill with different sizes', () => {
-  expect(Bill.calculationaBill([0], [0, 0], 20)).toMatchObject(Error('Error Bill'))
+  expect(Bill.calculationBill([0], [0, 0], 20)).toMatchObject(Error('Error Bill'))
 })
 test('get bill with negative values for prices', () => {
   expect(Bill.calculationBill([-10, 5], [10, 2], 20)).toBe(12)
