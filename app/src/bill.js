@@ -1,4 +1,5 @@
 const tva = require('../data/tva.json')
+const got = require('got')
 
 class Bill {
   static calculationBill (prices, quantities, tva) {
@@ -75,6 +76,25 @@ class Bill {
       default :
         return new Error('Error Discount')
     }
+  }
+
+  static async getCurrency (currency) {
+    try {
+      const response = await got('https://api.exchangeratesapi.io/latest')
+      const responseJson = JSON.parse(response.body)
+      return responseJson.rates[currency]
+    } catch (error) {
+      return new Error('Error Currency')
+    }
+  }
+
+  static async calculationCurrency (currency, total) {
+    console.log(total)
+    const value = await Promise.resolve(Bill.getCurrency(currency)).then(value => { return value })
+    if (value != null) {
+      total = total * value
+    }
+    return total
   }
 }
 
