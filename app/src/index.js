@@ -18,15 +18,18 @@ app.post('/bill', async (req, res) => {
   const tva = Bill.calculationTVA(country)
   let bill = Bill.calculationBill(prices, quantities, tva)
   if (bill.constructor === Error) {
-    res.status(400).json({ error: 'error message' })
+    res.status(400).json({ error: 'error in bill' })
   } else {
     if (discount) {
       bill = Bill.calculationDiscount(discount, bill)
       if (bill.constructor === Error) {
-        res.status(400).json({ error: 'error message' })
+        res.status(400).json({ error: 'error in discount' })
       }
     } if (currency) {
       bill = await Bill.calculationCurrency(currency, bill)
+      if (bill.constructor === Error) {
+        res.status(400).json({ error: 'error in currency' })
+      }
     }
     res.status(200).json({ total: bill })
   }

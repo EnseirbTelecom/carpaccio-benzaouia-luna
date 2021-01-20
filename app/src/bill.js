@@ -82,19 +82,20 @@ class Bill {
     try {
       const response = await got('https://api.exchangeratesapi.io/latest')
       const responseJson = JSON.parse(response.body)
-      return responseJson.rates[currency]
+      return JSON.stringify(responseJson.rates[currency])
     } catch (error) {
       return new Error('Error Currency')
     }
   }
 
   static async calculationCurrency (currency, total) {
-    console.log(total)
     const value = await Promise.resolve(Bill.getCurrency(currency)).then(value => { return value })
     if (value != null) {
       total = total * value
+    } else {
+      return new Error('Error Currency')
     }
-    return total
+    return JSON.stringify(total)
   }
 }
 
