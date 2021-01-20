@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const got = require('got')
 const id = require('../data/id.json')
 const Bill = require('./bill')
 
@@ -10,38 +9,29 @@ app.get('/id', (req, res) => {
   res.status(200).json(id)
 })
 
-async function getCurrency () {
-  try {
-    const response = await got('https://api.exchangeratesapi.io/latest')
-    // console.log(response.body);
-    return response.body
-  } catch (error) {
-    console.log(error.response.body)
-  }
-}
-
-getCurrency().then((a) => console.log(a))
-
-app.post('/bill', (req, res) => {
+app.post('/bill', async (req, res) => {
   const prices = req.body.prices
   const quantities = req.body.quantities
   const country = req.body.country
   const discount = req.body.discount
+  const currency = req.body.currency
   const tva = Bill.calculationTVA(country)
-  const bill = Bill.calculationBill(prices, quantities, tva)
+  let bill = Bill.calculationBill(prices, quantities, tva)
   if (bill.constructor === Error) {
-    res.status(400).json({ error: 'error message' })
+    res.status(400).json({ error: 'error in bill' })
   } else {
     if (discount) {
-      console.log(discount)
-      const discountBill = Bill.calculationDiscount(discount, bill)
-      if (discountBill.constructor === Error) {
-        res.status(400).json({ error: 'error message' })
+      bill = Bill.calculationDiscount(discount, bill)
+      if (bill.constructor === Error) {
+        res.status(400).json({ error: 'error in discount' })
       }
-      res.status(200).json({ total: discountBill })
-    } else {
-      res.status(200).json({ total: bill })
+    } if (currency) {
+      bill = await Bill.calculationCurrency(currency, bill)
+      if (bill.constructor === Error) {
+        res.status(400).json({ error: 'error in currency' })
+      }
     }
+    res.status(200).json({ total: bill })
   }
 })
 
