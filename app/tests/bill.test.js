@@ -89,7 +89,7 @@ test('get USD currency', () => {
 })
 test('convert to USD currency', () => {
   return expect(Bill.calculationCurrency('USD', 1)).resolves.toBe('1.2101')
-})*/
+}) */
 test('convert to wrong currency', () => {
   return expect(Bill.calculationCurrency('X', 1)).resolves.toMatchObject(Error('Error Currency'))
 })

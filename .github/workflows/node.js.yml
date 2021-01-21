@@ -10,7 +10,7 @@ on:
     branches: [ main ]
   release:
     types: [created]
-
+    
 jobs:
   test:
 
@@ -29,6 +29,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+    - run: npx standard --fix
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -38,6 +39,7 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-     
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+
