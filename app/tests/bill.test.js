@@ -1,6 +1,9 @@
 /* eslint-env jest */
 
 const Bill = require('../src/bill')
+const express = require('express')
+const app = express()
+app.use(express.json())
 
 test('get bill with 0 0', () => {
   expect(Bill.calculationBill([0, 0], [0, 0], 20)).toBe(0)
@@ -79,4 +82,14 @@ test('get total price with PROGRESSIVE_DISCOUNT and bill equal to -50000', () =>
 })
 test('get total bill with wrong discount', () => {
   expect(Bill.calculationDiscount('test_discount', 1200)).toMatchObject(Error('Error Discount'))
+})
+/*
+test('get USD currency', () => {
+  return expect(Bill.getCurrency('USD')).resolves.toBe('1.2101')
+})
+test('convert to USD currency', () => {
+  return expect(Bill.calculationCurrency('USD', 1)).resolves.toBe('1.2101')
+})*/
+test('convert to wrong currency', () => {
+  return expect(Bill.calculationCurrency('X', 1)).resolves.toMatchObject(Error('Error Currency'))
 })
