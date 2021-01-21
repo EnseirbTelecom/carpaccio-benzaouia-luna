@@ -29,20 +29,6 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-<<<<<<< Updated upstream
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-     
-=======
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -56,4 +42,3 @@ jobs:
           - Currency added
         draft: false
         prerelease: false
->>>>>>> Stashed changes
